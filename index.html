@@ -17,20 +17,23 @@
       }
       body {
         margin: 0;
-        font-family: Montserrat;
-        background: #0e1a2b;
+        font-family: "Montserrat", sans-serif;
+        background: linear-gradient(135deg, #0e1a2b, #1c273b);
         color: #fff;
         min-height: 100vh;
         display: flex;
         transition: background 0.5s;
       }
+
       #sidebar {
-        width: 32%;
-        background: #0b1523;
+        width: 28%;
+        background: linear-gradient(180deg, #0b1523, #14203a);
+        border-radius: 20px;
         padding: 30px;
         overflow-y: auto;
         transition: all 0.3s;
       }
+
       #content {
         flex: 1;
         display: flex;
@@ -40,9 +43,10 @@
         position: relative;
         transition: all 0.3s;
       }
+
       h1 {
         font-size: 32px;
-        margin: 0 0 20px 0;
+        margin-bottom: 20px;
       }
       .filter-container {
         margin-bottom: 20px;
@@ -51,28 +55,30 @@
         gap: 10px;
       }
       select {
-        padding: 6px 10px;
-        border-radius: 8px;
+        padding: 8px 12px;
+        border-radius: 10px;
         border: none;
         font-size: 16px;
+        background: #1c273b;
+        color: #fff;
       }
 
       .teacher-card {
         display: flex;
         align-items: center;
         gap: 16px;
-        padding: 14px;
+        padding: 16px;
         border-radius: 16px;
         cursor: pointer;
-        transition: 0.3s;
-        background: rgba(255, 255, 255, 0.05);
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.08);
         margin-bottom: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         position: relative;
       }
       .teacher-card:hover {
-        transform: scale(1.03);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-        border: 2px solid #4ade80;
+        transform: translateY(-3px);
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.5);
       }
       .teacher-card.active {
         box-shadow: 0 0 25px 4px #4ade80;
@@ -82,6 +88,7 @@
         opacity: 0.5;
         color: #f87171;
       }
+
       .avatar {
         width: 64px;
         height: 64px;
@@ -92,14 +99,10 @@
         justify-content: center;
         font-weight: 800;
         font-size: 22px;
-        position: relative;
         overflow: hidden;
         transition: all 0.3s;
       }
-      .avatar svg {
-        width: 100%;
-        height: 100%;
-      }
+
       .teacher-name {
         font-size: 18px;
         font-weight: 600;
@@ -111,14 +114,13 @@
       #info-card {
         position: sticky;
         top: 40px;
-        width: 70%;
+        width: 65%;
         padding: 40px;
-        border-radius: 28px;
-        background: linear-gradient(270deg, #1e3c72, #2a5298, #1e3c72);
+        border-radius: 32px;
+        background: linear-gradient(135deg, #1e3c72, #2a5298, #1e3c72);
         background-size: 600% 600%;
         animation: gradMove 15s ease infinite;
-        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6),
-          0 0 20px rgba(255, 255, 255, 0.05);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         text-align: left;
         opacity: 0;
         transform: translateY(20px);
@@ -131,17 +133,23 @@
         transform: translateY(0);
       }
       #info-title {
-        font-size: 44px;
+        font-size: 40px;
         font-weight: 800;
         margin-bottom: 25px;
         color: #fff;
         text-align: center;
       }
+
       .line {
         display: flex;
         align-items: flex-start;
         gap: 10px;
         margin: 12px 0;
+      }
+      .line i {
+        font-size: 20px;
+        color: #ffd700;
+        margin-top: 3px;
       }
       .label {
         opacity: 0.7;
@@ -153,12 +161,16 @@
         flex-direction: column;
         gap: 2px;
         color: #f0f0f0;
+        line-height: 1.5;
       }
+
       #clock {
         position: absolute;
         top: 30px;
         right: 40px;
         font-size: 22px;
+        color: #ffd700;
+        text-shadow: 0 0 10px #ffd700;
       }
       #logo {
         position: absolute;
@@ -187,12 +199,14 @@
         #sidebar {
           width: 100%;
           height: 50vh;
+          margin-bottom: 20px;
         }
         #content {
           height: 50vh;
         }
         #info-card {
           width: 90%;
+          padding: 30px;
         }
       }
     </style>
@@ -200,6 +214,7 @@
   <body>
     <div id="logo">School Directory</div>
     <div id="clock"></div>
+
     <div id="sidebar">
       <h1>Teachers</h1>
       <div class="filter-container">
@@ -212,33 +227,34 @@
       </div>
       <div id="teacherList"></div>
     </div>
+
     <div id="content">
       <div id="info-card">
         <div id="info-title">Select a Teacher</div>
         <div class="line">
-          <i class="fas fa-door-open"></i><span class="label">Room:</span>
-          <span id="room" class="value">—</span>
+          <i class="fas fa-door-open"></i><span class="label">Room:</span
+          ><span id="room" class="value">—</span>
         </div>
         <div class="line">
-          <i class="fas fa-layer-group"></i><span class="label">Floor:</span>
-          <span id="floor" class="value">—</span>
+          <i class="fas fa-layer-group"></i><span class="label">Floor:</span
+          ><span id="floor" class="value">—</span>
         </div>
         <div class="line">
           <i class="fas fa-user-friends"></i
-          ><span class="label">Assistant:</span>
-          <span id="assistant" class="value">—</span>
+          ><span class="label">Assistant:</span
+          ><span id="assistant" class="value">—</span>
         </div>
         <div class="line">
-          <i class="fas fa-clock"></i><span class="label">Schedule:</span>
-          <span id="schedule" class="value">—</span>
+          <i class="fas fa-clock"></i><span class="label">Schedule:</span
+          ><span id="schedule" class="value">—</span>
         </div>
         <div class="line">
-          <i class="fas fa-book"></i><span class="label">Subjects:</span>
-          <span id="subjects" class="value">—</span>
+          <i class="fas fa-book"></i><span class="label">Subjects:</span
+          ><span id="subjects" class="value">—</span>
         </div>
         <div class="line">
-          <i class="fas fa-school"></i><span class="label">Classes:</span>
-          <span id="classes" class="value">—</span>
+          <i class="fas fa-school"></i><span class="label">Classes:</span
+          ><span id="classes" class="value">—</span>
         </div>
       </div>
     </div>
@@ -277,8 +293,8 @@
         });
 
       function populateFilters() {
-        const classes = new Set();
-        const subjects = new Set();
+        const classes = new Set(),
+          subjects = new Set();
         data.forEach((t) => {
           if (Array.isArray(t.subjects))
             t.subjects.forEach((s) => subjects.add(s));
@@ -316,7 +332,6 @@
         listEl.innerHTML = "";
         const nowMinutes = now();
         const maleNames = ["Həmid", "Muhammed", "Məmməd", "Sərxan", "Vidadi"];
-
         list
           .sort((a, b) => a.teacher.localeCompare(b.teacher, "az"))
           .forEach((t) => {
@@ -333,20 +348,17 @@
               toMinTime = toMin(t.to);
             const isActive = nowMinutes >= fromMin && nowMinutes <= toMinTime;
 
-            const avatarSVG = `
-      <svg viewBox="0 0 100 100" width="64" height="64">
-        <defs>
-          <linearGradient id="g${initials}" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="${isMale ? "#2563eb" : "#c026d3"}"/>
-            <stop offset="100%" stop-color="${isMale ? "#1e40af" : "#86198f"}"/>
-          </linearGradient>
-        </defs>
-        <circle cx="50" cy="50" r="50" fill="url(#g${initials})"/>
-        <text x="50%" y="55%" text-anchor="middle" fill="#fff" font-size="36" font-family="Segoe UI, Arial" font-weight="600" dominant-baseline="middle">${initials}</text>
-        <circle cx="80" cy="80" r="10" fill="${
-          isActive ? "#4ade80" : "#f87171"
-        }" stroke="#fff" stroke-width="2"/>
-      </svg>`;
+            const avatarSVG = `<svg viewBox="0 0 100 100" width="64" height="64">
+      <defs><linearGradient id="g${initials}" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="${isMale ? "#2563eb" : "#c026d3"}"/>
+      <stop offset="100%" stop-color="${isMale ? "#1e40af" : "#86198f"}"/>
+      </linearGradient></defs>
+      <circle cx="50" cy="50" r="50" fill="url(#g${initials})"/>
+      <text x="50%" y="55%" text-anchor="middle" fill="#fff" font-size="36" font-family="Segoe UI, Arial" font-weight="600" dominant-baseline="middle">${initials}</text>
+      <circle cx="80" cy="80" r="10" fill="${
+        isActive ? "#4ade80" : "#f87171"
+      }" stroke="#fff" stroke-width="2"/>
+    </svg>`;
 
             const div = document.createElement("div");
             div.className = "teacher-card";
