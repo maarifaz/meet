@@ -1,57 +1,85 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Parent Meeting – Live Teacher Locations</title>
+<title>Parent Meeting – Teacher Directory</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-body{margin:0;font-family:Montserrat;background:#0e1a2b;color:#fff;display:flex;justify-content:center;align-items:center;height:100vh}
-#card{width:70%;padding:50px;border-radius:24px;background:linear-gradient(135deg,#1e3c72,#2a5298);box-shadow:0 40px 80px rgba(0,0,0,.4);text-align:center}
-#title{font-size:70px;font-weight:800;margin-bottom:30px}
-.line{font-size:60px;margin:28px 0}
+*{box-sizing:border-box}
+body{margin:0;font-family:Montserrat;background:#0e1a2b;color:#fff;min-height:100vh;display:flex}
+#sidebar{width:32%;background:#0b1523;padding:30px;overflow-y:auto}
+#content{flex:1;display:flex;justify-content:center;align-items:flex-start;padding-top:40px;position:relative}
+
+h1{font-size:32px;margin:0 0 20px 0}
+.teacher-card{display:flex;align-items:center;gap:16px;padding:14px;border-radius:16px;cursor:pointer;transition:.2s;background:rgba(255,255,255,.05);margin-bottom:12px}
+.teacher-card:hover{background:rgba(255,255,255,.12)}
+.teacher-card.active{background:linear-gradient(135deg,#1e3c72,#2a5298)}
+.avatar{width:64px;height:64px;border-radius:50%;background:#1e2f4f;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px}
+.avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.teacher-name{font-size:18px;font-weight:600}
+#info-card{position:sticky;top:40px;width:70%;padding:50px;border-radius:24px;background:linear-gradient(135deg,#1e3c72,#2a5298);box-shadow:0 40px 80px rgba(0,0,0,.4);text-align:center}
+#info-title{font-size:46px;font-weight:800;margin-bottom:30px}
+.line{font-size:28px;margin:14px 0}
 .label{opacity:.7}
 .value{font-weight:600}
-#clock{position:absolute;top:30px;right:40px;font-size:26px}
-#logo{position:absolute;top:25px;left:40px;font-size:26px;font-weight:800}
+#clock{position:absolute;top:30px;right:40px;font-size:22px}
+#logo{position:absolute;top:25px;left:40px;font-size:22px;font-weight:800}
+@media(max-width:900px){body{flex-direction:column}#sidebar{width:100%;height:45vh}#content{height:55vh}#info-card{width:90%}}
 </style>
 </head>
 <body>
 <div id="logo"></div>
 <div id="clock"></div>
-<div id="card">
-  <div id="title">NOW ACCEPTING PARENTS</div>
-  <div class="line"><span class="label">Teacher:</span> <span id="teacher" class="value"></span></div>
-  <div class="line"><span class="label">Room:</span> <span id="room" class="value"></span></div>
-  <div class="line"><span class="label">Floor:</span> <span id="floor" class="value"></span></div>
-  <div class="line"><span class="label">Assistant:</span> <span id="assistant" class="value"></span></div>
+<div id="sidebar">
+  <h1>Teachers</h1>
+  <div id="teacherList"></div>
 </div>
-
+<div id="content">
+  <div id="info-card">
+    <div id="info-title">Select a Teacher</div>
+    <div class="line"><span class="label">Room:</span> <span id="room" class="value">—</span></div>
+    <div class="line"><span class="label">Floor:</span> <span id="floor" class="value">—</span></div>
+    <div class="line"><span class="label">Assistant:</span> <span id="assistant" class="value">—</span></div>
+    <div class="line"><span class="label">Subjects / Classes:</span> <span id="subjects" class="value">—</span></div>
+  </div>
+</div>
 <script>
-let data=[],index=0;
-fetch('teachers.json').then(r=>r.json()).then(j=>data=j);
-
+let data=[];
+const listEl=document.getElementById('teacherList');
 function now(){const d=new Date();return d.getHours()*60+d.getMinutes();}
 function toMin(t){const[a,b]=t.split(':');return +a*60+ +b;}
-
-function update(){
-  const active=data.filter(t=>now()>=toMin(t.from)&&now()<=toMin(t.to));
-  if(active.length===0) return;
-  const t=active[index%active.length];
-  teacher.textContent=t.teacher;
-  room.textContent=t.room;
-  floor.textContent='Floor '+t.floor;
-  assistant.textContent=t.assistant||'—';
-  index++;
+fetch('teachers.json').then(r=>r.json()).then(j=>{
+  data=j.filter(t=>now()>=toMin(t.from)&&now()<=toMin(t.to));
+  renderList();
+});
+function initials(name){return name.split(' ').map(n=>n[0]).slice(0,2).join('');}
+function renderList(){
+  listEl.innerHTML='';
+  data.forEach((t,i)=>{
+    const div=document.createElement('div');
+    div.className='teacher-card';
+    div.innerHTML=`
+      <div class="avatar">${t.photo ? `<img src='${t.photo}'/>` : initials(t.teacher)}</div>
+      <div class="teacher-name">${t.teacher}</div>
+    `;
+    div.onclick=()=>selectTeacher(i,div);
+    listEl.appendChild(div);
+  });
 }
-setInterval(update,7000);
-update();
-
+function selectTeacher(i,el){
+  document.querySelectorAll('.teacher-card').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  const t=data[i];
+  document.getElementById('info-title').textContent=t.teacher;
+  document.getElementById('room').textContent=t.room;
+  document.getElementById('floor').textContent='Floor '+t.floor;
+  document.getElementById('assistant').textContent=t.assistant||'—';
+  document.getElementById('subjects').textContent=t.subjects||'—';
+}
 setInterval(()=>{
   const d=new Date();
-  clock.textContent=d.toLocaleTimeString();
+  document.getElementById('clock').textContent=d.toLocaleTimeString();
 },1000);
 </script>
 </body>
 </html>
-
