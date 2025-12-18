@@ -4,78 +4,140 @@
 <meta charset="UTF-8" />
 <title>Parent Meeting – Teacher Directory</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Montserrat;background:#0e1a2b;color:#fff;min-height:100vh;display:flex}
-#sidebar{width:32%;background:#0b1523;padding:30px;overflow-y:auto}
-#content{flex:1;display:flex;justify-content:center;align-items:flex-start;padding-top:40px;position:relative}
-
+body{margin:0;font-family:Montserrat;background:#0e1a2b;color:#fff;min-height:100vh;display:flex;transition:background 0.5s}
+#sidebar{width:32%;background:#0b1523;padding:30px;overflow-y:auto;transition:all 0.3s}
+#content{flex:1;display:flex;justify-content:center;align-items:flex-start;padding-top:40px;position:relative;transition:all 0.3s}
 h1{font-size:32px;margin:0 0 20px 0}
-.teacher-card{display:flex;align-items:center;gap:16px;padding:14px;border-radius:16px;cursor:pointer;transition:.2s;background:rgba(255,255,255,.05);margin-bottom:12px}
-.teacher-card:hover{background:rgba(255,255,255,.12)}
-.teacher-card.active{background:linear-gradient(135deg,#1e3c72,#2a5298)}
-.avatar{width:64px;height:64px;border-radius:50%;background:#1e2f4f;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px}
-.avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
-.teacher-name{font-size:18px;font-weight:600}
-#info-card{position:sticky;top:40px;width:70%;padding:50px;border-radius:24px;background:linear-gradient(135deg,#1e3c72,#2a5298);box-shadow:0 40px 80px rgba(0,0,0,.4);text-align:center}
+.filter-container{margin-bottom:20px;display:flex;flex-direction:column;gap:10px}
+select{padding:6px 10px;border-radius:8px;border:none;font-size:16px}
+.teacher-card{display:flex;align-items:center;gap:16px;padding:14px;border-radius:16px;cursor:pointer;transition:.3s;background:rgba(255,255,255,.05);margin-bottom:12px}
+.teacher-card:hover{transform:scale(1.03);box-shadow:0 8px 16px rgba(0,0,0,0.3)}
+.teacher-card.active{box-shadow:0 12px 24px rgba(0,0,0,0.4)}
+.avatar{width:64px;height:64px;border-radius:50%;background:#1e2f4f;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px;position:relative;overflow:hidden;transition:all 0.3s}
+.avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;border:4px solid transparent;transition:border 0.3s}
+.teacher-card:hover .avatar img{transform:scale(1.05);transition:0.3s}
+.teacher-name{font-size:18px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#info-card{position:sticky;top:40px;width:70%;padding:50px;border-radius:24px;background:linear-gradient(135deg,#1e3c72,#2a5298);box-shadow:0 40px 80px rgba(0,0,0,.4);text-align:center;opacity:0;transform:translateY(20px);transition:all 0.5s}
+#info-card.show{opacity:1;transform:translateY(0)}
 #info-title{font-size:46px;font-weight:800;margin-bottom:30px}
-.line{font-size:28px;margin:14px 0}
+.line{font-size:24px;margin:14px 0;display:flex;align-items:center;gap:10px;justify-content:center}
 .label{opacity:.7}
 .value{font-weight:600}
 #clock{position:absolute;top:30px;right:40px;font-size:22px}
 #logo{position:absolute;top:25px;left:40px;font-size:22px;font-weight:800}
-@media(max-width:900px){body{flex-direction:column}#sidebar{width:100%;height:45vh}#content{height:55vh}#info-card{width:90%}}
+@media(max-width:900px){body{flex-direction:column}#sidebar{width:100%;height:50vh}#content{height:50vh}#info-card{width:90%}}
 </style>
 </head>
 <body>
-<div id="logo"></div>
+<div id="logo">School Directory</div>
 <div id="clock"></div>
 <div id="sidebar">
   <h1>Teachers</h1>
+  <div class="filter-container">
+    <select id="classFilter">
+      <option value="all">All Classes</option>
+    </select>
+    <select id="subjectFilter">
+      <option value="all">All Subjects</option>
+    </select>
+  </div>
   <div id="teacherList"></div>
 </div>
 <div id="content">
   <div id="info-card">
     <div id="info-title">Select a Teacher</div>
-    <div class="line"><span class="label">Room:</span> <span id="room" class="value">—</span></div>
-    <div class="line"><span class="label">Floor:</span> <span id="floor" class="value">—</span></div>
-    <div class="line"><span class="label">Assistant:</span> <span id="assistant" class="value">—</span></div>
-    <div class="line"><span class="label">Subjects / Classes:</span> <span id="subjects" class="value">—</span></div>
+    <div class="line"><i class="fas fa-door-open"></i><span class="label">Room:</span> <span id="room" class="value">—</span></div>
+    <div class="line"><i class="fas fa-layer-group"></i><span class="label">Floor:</span> <span id="floor" class="value">—</span></div>
+    <div class="line"><i class="fas fa-user-friends"></i><span class="label">Assistant:</span> <span id="assistant" class="value">—</span></div>
+    <div class="line"><i class="fas fa-book"></i><span class="label">Subjects / Classes:</span> <span id="subjects" class="value">—</span></div>
   </div>
 </div>
 <script>
 let data=[];
+let filteredData=[];
 const listEl=document.getElementById('teacherList');
+const infoCard=document.getElementById('info-card');
+const classFilter=document.getElementById('classFilter');
+const subjectFilter=document.getElementById('subjectFilter');
+
 function now(){const d=new Date();return d.getHours()*60+d.getMinutes();}
 function toMin(t){const[a,b]=t.split(':');return +a*60+ +b;}
+
 fetch('teachers.json').then(r=>r.json()).then(j=>{
   data=j.filter(t=>now()>=toMin(t.from)&&now()<=toMin(t.to));
+  populateFilters();
   renderList();
 });
+
 function initials(name){return name.split(' ').map(n=>n[0]).slice(0,2).join('');}
-function renderList(){
+
+// Sinifə görə rəng
+function getClassColor(classes){
+  if(classes.includes('Preschool')) return '#ff9f43';
+  if(classes.some(c=>/[1-4]/.test(c))) return '#34ace0';
+  if(classes.some(c=>/[5-8]/.test(c))) return '#ff6b6b';
+  return '#2ed573';
+}
+
+function populateFilters(){
+  const classSet=new Set();
+  const subjectSet=new Set();
+  data.forEach(t=>{
+    t.subjects.forEach(s=>subjectSet.add(s));
+    t.classes.forEach(c=>classSet.add(c));
+  });
+  [...classSet].sort().forEach(c=>{
+    const opt=document.createElement('option'); opt.value=c; opt.textContent=c; classFilter.appendChild(opt);
+  });
+  [...subjectSet].sort().forEach(s=>{
+    const opt=document.createElement('option'); opt.value=s; opt.textContent=s; subjectFilter.appendChild(opt);
+  });
+}
+
+function applyFilters(){
+  const c=classFilter.value;
+  const s=subjectFilter.value;
+  filteredData=data.filter(t=>{
+    const classMatch=c==='all'?true:t.classes.includes(c);
+    const subjectMatch=s==='all'?true:t.subjects.includes(s);
+    return classMatch && subjectMatch;
+  });
+  renderList(filteredData);
+}
+
+function renderList(list=filteredData.length?filteredData:data){
   listEl.innerHTML='';
-  data.forEach((t,i)=>{
+  list.forEach((t,i)=>{
     const div=document.createElement('div');
     div.className='teacher-card';
+    const color=getClassColor(t.classes);
     div.innerHTML=`
-      <div class="avatar">${t.photo ? `<img src='${t.photo}'/>` : initials(t.teacher)}</div>
+      <div class="avatar" style="border:4px solid ${color}">${t.photo ? `<img src='${t.photo}'/>` : initials(t.teacher)}</div>
       <div class="teacher-name">${t.teacher}</div>
     `;
-    div.onclick=()=>selectTeacher(i,div);
+    div.onclick=()=>selectTeacher(i,div,list);
     listEl.appendChild(div);
   });
 }
-function selectTeacher(i,el){
+
+function selectTeacher(i,el,list=filteredData.length?filteredData:data){
   document.querySelectorAll('.teacher-card').forEach(c=>c.classList.remove('active'));
   el.classList.add('active');
-  const t=data[i];
+  const t=list[i];
   document.getElementById('info-title').textContent=t.teacher;
   document.getElementById('room').textContent=t.room;
   document.getElementById('floor').textContent='Floor '+t.floor;
   document.getElementById('assistant').textContent=t.assistant||'—';
-  document.getElementById('subjects').textContent=t.subjects||'—';
+  document.getElementById('subjects').textContent=t.subjects.join(', ')+' / '+t.classes.join(', ');
+  infoCard.classList.add('show');
 }
+
+classFilter.addEventListener('change',applyFilters);
+subjectFilter.addEventListener('change',applyFilters);
+
 setInterval(()=>{
   const d=new Date();
   document.getElementById('clock').textContent=d.toLocaleTimeString();
