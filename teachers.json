@@ -8,7 +8,7 @@
     "subjects": ["Direktor müavini"],
     "classes": [],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Xanım Cəbrayılova",
@@ -19,7 +19,7 @@
     "subjects": ["Cambridge Koordinatoru","Coğrafiya"],
     "classes": ["7A","7B","8A","9A"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Aygün Əhədova",
@@ -30,7 +30,7 @@
     "subjects": ["Psixoloq"],
     "classes": [],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Səadət Məmmədli",
@@ -41,7 +41,7 @@
     "subjects": ["İngilis dili","Speaking","Reading & Writing"],
     "classes": ["5A","5B","6A","6B","8A"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Fəridə Mustafazadə",
@@ -52,7 +52,7 @@
     "subjects": ["İngilis dili"],
     "classes": ["2A","8A"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Simuzər Məmmədova",
@@ -63,7 +63,7 @@
     "subjects": ["İngilis dili","Speaking"],
     "classes": ["3A","2B","3B","4B"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Aydan Bəşir",
@@ -74,7 +74,7 @@
     "subjects": ["Riyaziyyat"],
     "classes": ["7A","7B","8A","9A"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Niqina Məhmməd Əmin",
@@ -85,7 +85,7 @@
     "subjects": ["İngilis dili"],
     "classes": ["Preschool 1"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Aysu Mehdizadə",
@@ -96,7 +96,7 @@
     "subjects": ["İngilis dili"],
     "classes": ["Preschool 2"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Aydan Bəyişova",
@@ -107,7 +107,7 @@
     "subjects": ["İngilis dili"],
     "classes": ["Preschool 3"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Kəmalə Əkbərova",
@@ -118,7 +118,7 @@
     "subjects": ["Riyaziyyat"],
     "classes": ["5A","5B","6A","6B"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Müjgan Fərruxlu",
@@ -129,7 +129,7 @@
     "subjects": ["Azərbaycan dili"],
     "classes": ["5A","5B","6A","6B","7A","7B","8A","9A"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Gülnarə Süleymanova",
@@ -140,7 +140,7 @@
     "subjects": ["İngilis dili"],
     "classes": ["5B","7A"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Zemfira Abuşova",
@@ -151,7 +151,7 @@
     "subjects": ["İngilis dili"],
     "classes": ["2B","6A"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Səbina Yusifova",
@@ -162,7 +162,7 @@
     "subjects": ["Kimya-biologiya"],
     "classes": ["6A","6B","7A","7B","8A","9A"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Nigar Abbasova",
@@ -171,9 +171,9 @@
     "floor": 3,
     "assistant": "—",
     "subjects": ["Kimya-biologiya"],
-    "classes": ["5A","5B","8A"],
+    "classes": ["5A","5B","8A", "9A"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Nigar Sadıqlı",
@@ -184,7 +184,7 @@
     "subjects": ["Coğrafiya","Azərbaycan tarixi"],
     "classes": ["5A","5B","6A","6B","7A","7B","8A","9A"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Məmməd Kərimli",
@@ -195,7 +195,7 @@
     "subjects": ["İnformasiya texnologiyaları"],
     "classes": ["5A","5B","6A","6B","7A","7B","8A","9A"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Kamran Əhmədov",
@@ -206,7 +206,7 @@
     "subjects": ["Musiqi"],
     "classes": ["Preschool 1","Preschool 2","Preschool 3","1A","1B","2A","2B","3A","3B","4A","4B","5A","5B"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Nəzrin Hüseynova",
@@ -217,7 +217,7 @@
     "subjects": ["Təsviri incəsənət"],
     "classes": ["Preschool 1","Preschool 2","Preschool 3","1A","1B","2A","2B"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Muhammed Karasu",
@@ -228,7 +228,7 @@
     "subjects": ["Türk dili"],
     "classes": ["4A","4B","5A","5B","6A","6B","7A","7B","8A","9A"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Tamara Məmmədova",
@@ -239,7 +239,7 @@
     "subjects": ["Rus dili"],
     "classes": ["6A","6B","7A","7B","8A","9A"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Süleyman Əliyev",
@@ -250,7 +250,7 @@
     "subjects": ["Bədən tərbiyəsi"],
     "classes": ["Preschool 1","Preschool 2","Preschool 3","1A","1B","2A","2B","3A","3B"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Sərxan Məmmədov",
@@ -261,7 +261,7 @@
     "subjects": ["Bədən tərbiyəsi"],
     "classes": ["4A","4B","5A","5B","6A","6B","7A","7B","8A","9A"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Arzu Quliyeva",
@@ -272,7 +272,7 @@
     "subjects": ["Robotexnika"],
     "classes": ["Preschool 1","Preschool 2","Preschool 3","1A","1B","2A","2B"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Emilya Seyidli",
@@ -283,7 +283,7 @@
     "subjects": ["İngilis dili","Global Perspectives"],
     "classes": ["1A","1B","2A","2B","3A","3B","4A","4B","5A","5B","3A"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Nuranə Cəfərova",
@@ -294,7 +294,7 @@
     "subjects": ["Təsviri incəsənət"],
     "classes": ["3A","3B","4A","4B","5A","5B","6A","6B"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Həmid Quliyev",
@@ -305,7 +305,7 @@
     "subjects": ["Tarix"],
     "classes": ["6A","6B","7A","7B","8A","9A"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Mahirə Məhərrəmova",
@@ -316,7 +316,7 @@
     "subjects": ["Riyaziyyat"],
     "classes": ["3A","3B","4A","4B"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Saraxanım Zöhrabzadə",
@@ -327,7 +327,7 @@
     "subjects": ["Robotexnika"],
     "classes": ["1A","1B","2A","2B","3A","3B","4A","4B"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Nərmin Xanbabayeva",
@@ -338,7 +338,7 @@
     "subjects": ["Alman dili"],
     "classes": ["2A","2B","3A","3B","4A","4B","5A","5B","9A"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Solmaz Mikayılzadə",
@@ -349,7 +349,7 @@
     "subjects": ["Azərbaycan dili"],
     "classes": ["Preschool 1","Preschool 2","Preschool 3","1A","1B","2A","2B","3A","3B","4A","4B"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Fidan Nəzirova",
@@ -360,7 +360,7 @@
     "subjects": ["Preschool"],
     "classes": ["1","2","3","1A","1B","2A","2B","3A","3B"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Günel Məmmədəliyeva",
@@ -371,7 +371,7 @@
     "subjects": ["Psixoloq"],
     "classes": [],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Fatimə Mürşüdova",
@@ -382,7 +382,7 @@
     "subjects": ["İngilis dili"],
     "classes": ["1A"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Vidadi Qənizadə",
@@ -393,7 +393,7 @@
     "subjects": ["Kimya-biologiya"],
     "classes": ["3A","3B","4A","4B","9A"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Lalə İsmayılova Əli",
@@ -404,7 +404,7 @@
     "subjects": ["İngilis dili"],
     "classes": ["4A","9A"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Aysel Abdullayeva",
@@ -415,7 +415,7 @@
     "subjects": ["İngilis dili","Speaking"],
     "classes": ["3B","6B","6A"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Nigar Xanlar",
@@ -426,7 +426,7 @@
     "subjects": ["İngilis dili","Speaking"],
     "classes": ["4B","7B","7A"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   },
   {
     "teacher": "Afet Qasımova",
@@ -437,7 +437,7 @@
     "subjects": ["İqtisadiyyat","Global Perspectives"],
     "classes": ["6A","6B","7A","7B","8A","9A"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "12:00"
   },
   {
     "teacher": "Könül Sadıxova",
@@ -448,6 +448,6 @@
     "subjects": ["Kimya-biologiya"],
     "classes": ["2A","2B"],
     "from": "09:00",
-    "to": "14:00"
+    "to": "17:00"
   }
 ]
