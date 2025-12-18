@@ -10,27 +10,22 @@
 body{margin:0;font-family:Montserrat;background:#0e1a2b;color:#fff;min-height:100vh;display:flex;transition:background 0.5s}
 #sidebar{width:32%;background:#0b1523;padding:30px;overflow-y:auto;transition:all 0.3s}
 #content{flex:1;display:flex;justify-content:center;align-items:flex-start;padding-top:40px;position:relative;transition:all 0.3s}
-
 h1{font-size:32px;margin:0 0 20px 0}
 .filter-container{margin-bottom:20px;display:flex;flex-direction:column;gap:10px}
 select{padding:6px 10px;border-radius:8px;border:none;font-size:16px}
-
 .teacher-card{display:flex;align-items:center;gap:16px;padding:14px;border-radius:16px;cursor:pointer;transition:.3s;background:rgba(255,255,255,.05);margin-bottom:12px}
 .teacher-card:hover{transform:scale(1.03);box-shadow:0 8px 16px rgba(0,0,0,0.3)}
 .teacher-card.active{box-shadow:0 12px 24px rgba(0,0,0,0.4)}
-
 .avatar{width:64px;height:64px;border-radius:50%;background:#1e2f4f;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px;position:relative;overflow:hidden;transition:all 0.3s}
 .avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;border:4px solid transparent;transition:border 0.3s}
 .teacher-card:hover .avatar img{transform:scale(1.05);transition:0.3s}
 .teacher-name{font-size:18px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
 #info-card{position:sticky;top:40px;width:70%;padding:50px;border-radius:24px;background:linear-gradient(135deg,#1e3c72,#2a5298);box-shadow:0 40px 80px rgba(0,0,0,.4);text-align:center;opacity:0;transform:translateY(20px);transition:all 0.5s}
 #info-card.show{opacity:1;transform:translateY(0)}
 #info-title{font-size:46px;font-weight:800;margin-bottom:30px}
 .line{font-size:24px;margin:14px 0;display:flex;align-items:center;gap:10px;justify-content:center}
 .label{opacity:.7}
 .value{font-weight:600}
-
 #clock{position:absolute;top:30px;right:40px;font-size:22px}
 #logo{position:absolute;top:25px;left:40px;font-size:22px;font-weight:800}
 @media(max-width:900px){body{flex-direction:column}#sidebar{width:100%;height:50vh}#content{height:50vh}#info-card{width:90%}}
@@ -61,7 +56,7 @@ select{padding:6px 10px;border-radius:8px;border:none;font-size:16px}
   </div>
 </div>
 <script>
-let data=[]; 
+let data=[];
 let filteredData=[];
 const listEl=document.getElementById('teacherList');
 const infoCard=document.getElementById('info-card');
@@ -79,24 +74,25 @@ fetch('teachers.json').then(r=>r.json()).then(j=>{
 
 function initials(name){return name.split(' ').map(n=>n[0]).slice(0,2).join('');}
 
-function getClassColor(subjects){
-  if(subjects.includes('Preschool')) return '#ff9f43';
-  if(subjects.match(/[1-4][A-Z]?/)) return '#34ace0';
-  if(subjects.match(/[5-8][A-Z]?/)) return '#ff6b6b';
+// Sinifə görə rəng
+function getClassColor(classes){
+  if(classes.includes('Preschool')) return '#ff9f43';
+  if(classes.some(c=>/[1-4]/.test(c))) return '#34ace0';
+  if(classes.some(c=>/[5-8]/.test(c))) return '#ff6b6b';
   return '#2ed573';
 }
 
 function populateFilters(){
-  const classes=new Set();
-  const subjects=new Set();
+  const classSet=new Set();
+  const subjectSet=new Set();
   data.forEach(t=>{
-    t.subjects.forEach(s=>subjects.add(s));
-    if(t.classes) t.classes.forEach(c=>classes.add(c));
+    t.subjects.forEach(s=>subjectSet.add(s));
+    t.classes.forEach(c=>classSet.add(c));
   });
-  [...classes].sort().forEach(c=>{
+  [...classSet].sort().forEach(c=>{
     const opt=document.createElement('option'); opt.value=c; opt.textContent=c; classFilter.appendChild(opt);
   });
-  [...subjects].sort().forEach(s=>{
+  [...subjectSet].sort().forEach(s=>{
     const opt=document.createElement('option'); opt.value=s; opt.textContent=s; subjectFilter.appendChild(opt);
   });
 }
@@ -105,8 +101,8 @@ function applyFilters(){
   const c=classFilter.value;
   const s=subjectFilter.value;
   filteredData=data.filter(t=>{
-    let classMatch=c==='all'?true:(t.classes && t.classes.includes(c));
-    let subjectMatch=s==='all'?true:(t.subjects && t.subjects.includes(s));
+    const classMatch=c==='all'?true:t.classes.includes(c);
+    const subjectMatch=s==='all'?true:t.subjects.includes(s);
     return classMatch && subjectMatch;
   });
   renderList(filteredData);
@@ -117,7 +113,7 @@ function renderList(list=filteredData.length?filteredData:data){
   list.forEach((t,i)=>{
     const div=document.createElement('div');
     div.className='teacher-card';
-    const color=getClassColor(t.subjects.join(','));
+    const color=getClassColor(t.classes);
     div.innerHTML=`
       <div class="avatar" style="border:4px solid ${color}">${t.photo ? `<img src='${t.photo}'/>` : initials(t.teacher)}</div>
       <div class="teacher-name">${t.teacher}</div>
@@ -135,7 +131,7 @@ function selectTeacher(i,el,list=filteredData.length?filteredData:data){
   document.getElementById('room').textContent=t.room;
   document.getElementById('floor').textContent='Floor '+t.floor;
   document.getElementById('assistant').textContent=t.assistant||'—';
-  document.getElementById('subjects').textContent=(t.subjects.join(', ')) + (t.classes ? ' (' + t.classes.join(', ') + ')' : '');
+  document.getElementById('subjects').textContent=t.subjects.join(', ')+' / '+t.classes.join(', ');
   infoCard.classList.add('show');
 }
 
