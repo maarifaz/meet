@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Parent Meeting – Teacher Directory</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap"
       rel="stylesheet"
@@ -192,24 +193,6 @@
         }
       }
 
-      @media (max-width: 900px) {
-        body {
-          flex-direction: column;
-        }
-        #sidebar {
-          width: 100%;
-          height: 50vh;
-          margin-bottom: 20px;
-        }
-        #content {
-          height: 50vh;
-        }
-        #info-card {
-          width: 90%;
-          padding: 30px;
-        }
-      }
-
       /* Info Button + Modal */
       #info-btn {
         position: fixed;
@@ -272,12 +255,51 @@
         margin-bottom: 15px;
         text-align: center;
       }
+
+      /* Mobile responsive */
+      @media (max-width: 600px) {
+        body {
+          flex-direction: column;
+        }
+        #sidebar {
+          width: 100%;
+          padding: 15px;
+          margin-bottom: 15px;
+          max-height: 50vh;
+          overflow-y: auto;
+        }
+        #content {
+          width: 100%;
+          padding: 15px;
+          max-height: 50vh;
+          overflow-y: auto;
+        }
+        #info-card {
+          width: 95%;
+          padding: 15px;
+          font-size: 16px;
+        }
+        .teacher-card {
+          flex-direction: row;
+          gap: 12px;
+          padding: 12px;
+        }
+        #info-btn {
+          padding: 12px 20px;
+          font-size: 16px;
+        }
+        #info-content {
+          width: 90%;
+          margin: 20% auto;
+        }
+        select {
+          font-size: 18px;
+          padding: 10px 14px;
+        }
+      }
     </style>
   </head>
   <body>
-    <div id="logo">School Directory</div>
-    <div id="clock"></div>
-
     <div id="sidebar">
       <h1>Teachers</h1>
       <div class="filter-container">
@@ -456,8 +478,7 @@
           });
       }
 
-      let meetingTimer; // taymer üçün qlobal dəyişən
-
+      let meetingTimer;
       function selectTeacher(t, el, isActive) {
         document
           .querySelectorAll(".teacher-card")
@@ -497,7 +518,6 @@
 
         if (meetingTimer) clearTimeout(meetingTimer);
 
-        // 5 dəqiqəlik taymer
         meetingTimer = setTimeout(() => {
           el.classList.remove("active");
           el.classList.add("offline");
