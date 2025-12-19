@@ -110,6 +110,7 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        max-width: calc(100% - 70px);
       }
 
       #info-card {
@@ -128,17 +129,21 @@
         transition: all 0.5s;
         font-size: 25px;
         color: #fff;
+        word-break: break-word;
+        overflow-wrap: break-word;
       }
       #info-card.show {
         opacity: 1;
         transform: translateY(0);
       }
       #info-title {
-        font-size: 60px;
+        font-size: 36px;
         font-weight: 800;
         margin-bottom: 25px;
         color: #fff;
         text-align: center;
+        word-break: break-word;
+        overflow-wrap: break-word;
       }
 
       .line {
@@ -146,6 +151,7 @@
         align-items: flex-start;
         gap: 10px;
         margin: 12px 0;
+        flex-wrap: wrap;
       }
       .line i {
         font-size: 20px;
@@ -163,6 +169,8 @@
         gap: 2px;
         color: #f0f0f0;
         line-height: 1.5;
+        word-break: break-word;
+        overflow-wrap: break-word;
       }
 
       #clock {
@@ -300,6 +308,9 @@
     </style>
   </head>
   <body>
+    <div id="logo">School Directory</div>
+    <div id="clock"></div>
+
     <div id="sidebar">
       <h1>Teachers</h1>
       <div class="filter-container">
@@ -344,10 +355,8 @@
       </div>
     </div>
 
-    <!-- Info Button -->
     <div id="info-btn">Info</div>
 
-    <!-- Info Modal -->
     <div id="info-modal">
       <div id="info-content">
         <span id="close-info">&times;</span>
