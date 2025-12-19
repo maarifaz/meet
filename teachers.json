@@ -170,7 +170,7 @@
     "room": "Koordinator otağı",
     "floor": 3,
     "assistant": "—",
-    "subjects": ["Kimya-biologiya"],
+    "subjects": ["Physics - Science"],
     "classes": ["5A","5B","8A", "9A"],
     "from": "09:00",
     "to": "17:00"
