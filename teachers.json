@@ -249,8 +249,8 @@
     "assistant": "—",
     "subjects": ["Bədən tərbiyəsi"],
     "classes": ["Preschool 1","Preschool 2","Preschool 3","1A","1B","2A","2B","3A","3B"],
-    "from": "09:00",
-    "to": "17:00"
+    "from": "",
+    "to": ""
   },
   {
     "teacher": "Sərxan Məmmədov",
@@ -260,8 +260,8 @@
     "assistant": "—",
     "subjects": ["Bədən tərbiyəsi"],
     "classes": ["4A","4B","5A","5B","6A","6B","7A","7B","8A","9A"],
-    "from": "09:00",
-    "to": "17:00"
+    "from": "",
+    "to": ""
   },
   {
     "teacher": "Arzu Quliyeva",
@@ -326,8 +326,8 @@
     "assistant": "—",
     "subjects": ["Robotexnika"],
     "classes": ["1A","1B","2A","2B","3A","3B","4A","4B"],
-    "from": "09:00",
-    "to": "17:00"
+    "from": "",
+    "to": ""
   },
   {
     "teacher": "Nərmin Xanbabayeva",
